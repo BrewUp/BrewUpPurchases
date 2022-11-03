@@ -10,7 +10,7 @@ public sealed class PurchasesModule : IModule
 
     public IServiceCollection RegisterModule(WebApplicationBuilder builder)
     {
-        builder.Services.AddStoreModule();
+        builder.Services.AddPurchaseModule();
 
         return builder.Services;
     }
