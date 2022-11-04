@@ -9,6 +9,7 @@ public sealed class OrdineFornitore : AggregateRoot
     private OrderNumber _orderNumber = default!;
 
     private Fornitore _fornitore = default!;
+    private int IndiceQualita = 0;
 
     private DataInserimento _dataInserimento = default!;
     private DataPrevistaConsegna _dataPrevistaConsegna = default!;
@@ -46,5 +47,23 @@ public sealed class OrdineFornitore : AggregateRoot
         _dataPrevistaConsegna = @event.DataPrevistaConsegna;
 
         _rows = @event.Rows;
+    }
+
+    internal void EvadiOrdineFornitore(IEnumerable<OrderRow> rows, DataEffettivaConsegna dataEffettivaConsegna)
+    {
+        var newRows =
+            (from row in rows
+                let chkRow = _rows.FirstOrDefault(r => r.Ingredient.IngredientId.Equals(row.Ingredient.IngredientId))
+                where chkRow != null
+                select row).ToList();
+        var eventRows = Enumerable.Empty<OrderRow>();
+        eventRows = eventRows.Concat(newRows);
+
+        RaiseEvent(new OrdineFornitoreEvaso(new OrderId(Id.Value), dataEffettivaConsegna, eventRows));
+    }
+
+    private void Apply(OrdineFornitoreEvaso @event)
+    {
+
     }
 }

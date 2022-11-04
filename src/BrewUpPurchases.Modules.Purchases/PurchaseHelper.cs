@@ -23,12 +23,14 @@ public static class PurchaseHelper
 
         services.AddScoped<IStoreOrchestrator, StoreOrchestrator>();
         services.AddScoped<IIngredientsService, IngredientsService>();
+        services.AddScoped<ISupplierExpositionService, SupplierExpositionService>();
         services.AddScoped<IStoreService, StoreService>();
 
         services.AddScoped<IDomainEventHandlerFactoryAsync, DomainEventHandlerFactoryAsync>();
         services.AddScoped<ICommandHandlerFactoryAsync, CommandHandlerFactoryAsync>();
 
         services.AddScoped<IDomainEventHandlerAsync<OrdineFornitoreInserito>, OrdineFornitoreInseritoEventHandler>();
+        services.AddScoped<IDomainEventHandlerAsync<OrdineFornitoreInserito>, OrdineFornitoreInseritoForExpositionEventHandler>();
 
         return services;
     }
