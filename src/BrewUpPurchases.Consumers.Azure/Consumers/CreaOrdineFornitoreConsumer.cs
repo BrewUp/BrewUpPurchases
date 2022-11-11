@@ -6,7 +6,7 @@ using Muflone.Persistence;
 using Muflone.Transport.Azure.Consumers;
 using Muflone.Transport.Azure.Models;
 
-namespace BrewUpPurchases.Domain.Consumers;
+namespace BrewUpPurchases.Consumers.Azure.Consumers;
 
 public sealed class CreaOrdineFornitoreConsumer : CommandConsumerBase<CreaOrdineFornitore>
 {

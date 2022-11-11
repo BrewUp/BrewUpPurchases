@@ -15,6 +15,7 @@
 		<PackageReference Include="FluentValidation.AspNetCore" Version="11.2.2" />
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
 		<PackageReference Include="Muflone.Transport.Azure" Version="6.1.1" />
+		<PackageReference Include="Muflone.Transport.RabbitMQ" Version="6.0.1" />
 		<PackageReference Include="Serilog" Version="2.12.0" />
 		<PackageReference Include="Serilog.Extensions.Logging" Version="3.1.0" />
 		<PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
@@ -22,6 +23,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\BrewUpPurchases.Consumers.Azure\BrewUpPurchases.Consumers.Azure.csproj" />
+	  <ProjectReference Include="..\BrewUpPurchases.Consumers.RMQ\BrewUpPurchases.Consumers.RMQ.csproj" />
 	  <ProjectReference Include="..\BrewUpPurchases.Domain\BrewUpPurchases.Domain.csproj" />
 	  <ProjectReference Include="..\BrewUpPurchases.Modules.Purchases\BrewUpPurchases.Modules.Purchases.csproj" />
 	  <ProjectReference Include="..\BrewUpPurchases.ReadModel.MongoDb\BrewUpPurchases.ReadModel.MongoDb.csproj" />

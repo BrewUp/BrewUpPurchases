@@ -7,17 +7,17 @@
   </PropertyGroup>
 
 	<ItemGroup>
-		<Folder Include="Abstracts" />
-		<Folder Include="CommandHandlers\" />
-		<Folder Include="Entities\" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="Muflone" Version="6.1.1" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.1" />
+		<PackageReference Include="Muflone.Transport.RabbitMQ" Version="6.0.1" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Folder Include="Consumers\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\BrewUpPurchases.Domain\BrewUpPurchases.Domain.csproj" />
 	  <ProjectReference Include="..\BrewUpPurchases.Modules.BrewUpPurchases.Shared\BrewUpPurchases.Modules.BrewUpPurchases.Shared.csproj" />
 	</ItemGroup>
 

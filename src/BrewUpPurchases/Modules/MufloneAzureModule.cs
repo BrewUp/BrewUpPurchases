@@ -1,7 +1,6 @@
-﻿using BrewUpPurchases.Domain.Consumers;
+﻿using BrewUpPurchases.Consumers.Azure.Consumers;
 using BrewUpPurchases.Modules.BrewUpPurchases.Shared.Commands;
 using BrewUpPurchases.Modules.BrewUpPurchases.Shared.Events;
-using BrewUpPurchases.Modules.Purchases.Consumers;
 using BrewUpPurchases.ReadModel.MongoDb;
 using BrewUpPurchases.Shared;
 using BrewUpPurchases.Shared.Configuration;
@@ -10,12 +9,13 @@ using Muflone.Persistence;
 using Muflone.Transport.Azure;
 using Muflone.Transport.Azure.Abstracts;
 using Muflone.Transport.Azure.Models;
+using OrdineFornitoreInseritoConsumer = BrewUpPurchases.Modules.Purchases.Consumers.OrdineFornitoreInseritoConsumer;
 
 namespace BrewUpPurchases.Modules;
 
-public sealed class InfrastructureModule : IModule
+public sealed class MufloneAzureModule : IModule
 {
-    public bool IsEnabled => true;
+    public bool IsEnabled => false;
     public int Order => 98;
 
     public IServiceCollection RegisterModule(WebApplicationBuilder builder)
