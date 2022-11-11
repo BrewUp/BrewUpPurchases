@@ -8,9 +8,9 @@ using Microsoft.Extensions.Logging;
 
 namespace BrewUpPurchases.Modules.Purchases.Concretes;
 
-public sealed class StoreService : StoreBaseService, IStoreService
+public sealed class PurchaseService : PurchaseBaseService, IPurchaseService
 {
-    public StoreService(IPersister persister, ILoggerFactory loggerFactory)
+    public PurchaseService(IPersister persister, ILoggerFactory loggerFactory)
         : base(persister, loggerFactory)
     {
     }
@@ -24,6 +24,27 @@ public sealed class StoreService : StoreBaseService, IStoreService
                 dataPrevistaConsegna, rows);
 
             await Persister.InsertAsync(supplierOrder);
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(CommonServices.GetDefaultErrorTrace(ex));
+            throw;
+        }
+    }
+
+    public async Task EvadiOrdinFornitoreAsync(OrderId orderId, DataEffettivaConsegna dataEffettivaConsegna, IEnumerable<OrderRow> rows)
+    {
+        try
+        {
+            var order = await Persister.GetByIdAsync<SupplierOrder>(orderId.ToString());
+            order.EvadiOrdineFornitore(dataEffettivaConsegna, rows);
+
+            var propertiesToUpdate = new Dictionary<string, object>
+            {
+                { "DataEffettivaConsegna", order.DataEffettivaConsegna },
+                { "Rows", order.Rows },
+            };
+            await Persister.UpdateOneAsync<SupplierOrder>(order.Id, propertiesToUpdate);
         }
         catch (Exception ex)
         {

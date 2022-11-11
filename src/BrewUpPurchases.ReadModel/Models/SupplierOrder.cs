@@ -12,6 +12,7 @@ public class SupplierOrder : ModelBase
 
     public DateTime DataInserimento { get; private set; } = DateTime.MinValue;
     public DateTime DataPrevistaConsegna { get; private set; } = DateTime.MinValue;
+    public DateTime DataEffettivaConsegna { get; private set; } = DateTime.MinValue;
 
     public IEnumerable<SupplierOrderRowsJson> Rows { get; private set; } = Enumerable.Empty<SupplierOrderRowsJson>();
 
@@ -48,6 +49,21 @@ public class SupplierOrder : ModelBase
         DataPrevistaConsegna = dataPrevistaConsegna;
 
         Rows = rows;
+    }
+
+    public void EvadiOrdineFornitore(DataEffettivaConsegna dataEffettivaConsegna, IEnumerable<OrderRow> rows)
+    {
+        DataEffettivaConsegna = dataEffettivaConsegna.Value;
+
+        Rows = rows.Select(r => new SupplierOrderRowsJson
+        {
+            RowId = r.RowId.Value,
+
+            IngredientId = r.Ingredient.IngredientId.Value,
+            IngredientName = r.Ingredient.IngredientName.Value,
+
+            Quantity = r.Quantity.Value
+        });
     }
 
     public SupplierOrderJson ToJson() => new()

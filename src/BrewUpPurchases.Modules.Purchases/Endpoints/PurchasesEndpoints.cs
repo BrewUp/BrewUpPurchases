@@ -46,7 +46,21 @@ public static class PurchasesEndpoints
         return Results.Accepted($"v1/purchases/orders/{orderId}");
     }
 
-    public static async Task<IResult> HandleGetSupplierOrders(IStoreService storeService)
+    public static async Task<IResult> HandleEvadiOrdineFornitore(IStoreOrchestrator storeOrchestrator,
+        IValidator<SupplierOrderJson> validator,
+        ValidationHandler validationHandler,
+        SupplierOrderJson body)
+    {
+        await validationHandler.ValidateAsync(validator, body);
+        if (!validationHandler.IsValid)
+            return Results.BadRequest(validationHandler.Errors);
+
+        await storeOrchestrator.EvadiOrdineFornitoreAsync(body);
+
+        return Results.NoContent();
+    }
+
+    public static async Task<IResult> HandleGetSupplierOrders(IPurchaseService storeService)
     {
         var orders = await storeService.GetSupplierOrdersAsync();
 

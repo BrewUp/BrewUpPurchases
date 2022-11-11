@@ -36,7 +36,10 @@ public sealed class InfrastructureModule : IModule
         var consumers = new List<IConsumer>
         {
             new CreaOrdineFornitoreConsumer(repository!, azureBusConfiguration with { TopicName = nameof(CreaOrdineFornitore) }, loggerFactory!),
-            new OrdineFornitoreInseritoConsumer(domainEventHandlerFactoryAsync!, azureBusConfiguration with { TopicName = nameof(OrdineFornitoreInserito) }, loggerFactory!)
+            new OrdineFornitoreInseritoConsumer(domainEventHandlerFactoryAsync!, azureBusConfiguration with { TopicName = nameof(OrdineFornitoreInserito) }, loggerFactory!),
+
+            new EvadiOrdineFornitoreConsumer(repository!, azureBusConfiguration with { TopicName = nameof(EvadiOrdineFornitore)}, loggerFactory!),
+            new OrdineFornitoreEvasoConsumer(domainEventHandlerFactoryAsync!, azureBusConfiguration with { TopicName = nameof(OrdineFornitoreEvaso) }, loggerFactory!)
         };
         builder.Services.AddMufloneTransportAzure(
             new AzureServiceBusConfiguration(builder.Configuration["BrewUp:ServiceBusSettings:ConnectionString"], "",

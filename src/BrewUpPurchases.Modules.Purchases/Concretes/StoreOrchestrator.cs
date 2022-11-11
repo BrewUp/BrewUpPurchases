@@ -36,4 +36,17 @@ public sealed class StoreOrchestrator : StoreBaseOrchestrator, IStoreOrchestrato
 
         return orderToCreate.OrderId;
     }
+
+    public async Task EvadiOrdineFornitoreAsync(SupplierOrderJson orderToShip)
+    {
+        // Controllare nel ReadModel che l'Ordine esista!
+
+        var evadiOrdine = new EvadiOrdineFornitore(new OrderId(new Guid(orderToShip.OrderId)),
+            new DataEffettivaConsegna(orderToShip.DataPrevistaConsegna),
+            orderToShip.Rows.Select(r => new OrderRow(new RowId(r.RowId),
+                new Ingredient(new IngredientId(r.IngredientId), new IngredientName(r.IngredientName)),
+                new Quantity(r.Quantity))));
+
+        await _serviceBus.SendAsync(evadiOrdine);
+    }
 }

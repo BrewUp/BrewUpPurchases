@@ -9,10 +9,10 @@ public sealed class OrdineFornitore : AggregateRoot
     private OrderNumber _orderNumber = default!;
 
     private Fornitore _fornitore = default!;
-    private int IndiceQualita = 0;
 
     private DataInserimento _dataInserimento = default!;
     private DataPrevistaConsegna _dataPrevistaConsegna = default!;
+    private DataEffettivaConsegna _dataEffettivaConsegna = default!;
 
     private IEnumerable<OrderRow> _rows = default!;
 
@@ -64,6 +64,7 @@ public sealed class OrdineFornitore : AggregateRoot
 
     private void Apply(OrdineFornitoreEvaso @event)
     {
-
+        _dataEffettivaConsegna = @event.DataEffettivaConsegna;
+        _rows = @event.Rows;
     }
 }

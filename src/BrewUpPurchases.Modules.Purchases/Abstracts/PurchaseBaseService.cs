@@ -3,12 +3,12 @@ using Microsoft.Extensions.Logging;
 
 namespace BrewUpPurchases.Modules.Purchases.Abstracts;
 
-public abstract class StoreBaseService
+public abstract class PurchaseBaseService
 {
     protected readonly IPersister Persister;
     protected readonly ILogger Logger;
 
-    protected StoreBaseService(IPersister persister,
+    protected PurchaseBaseService(IPersister persister,
         ILoggerFactory loggerFactory)
     {
         Persister = persister;

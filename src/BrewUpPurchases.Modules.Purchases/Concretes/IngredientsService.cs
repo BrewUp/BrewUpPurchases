@@ -8,7 +8,7 @@ using Ingredient = BrewUpPurchases.ReadModel.Models.Ingredient;
 
 namespace BrewUpPurchases.Modules.Purchases.Concretes;
 
-public sealed class IngredientsService : StoreBaseService, IIngredientsService
+public sealed class IngredientsService : PurchaseBaseService, IIngredientsService
 {
     public IngredientsService(IPersister persister, ILoggerFactory loggerFactory) : base(persister, loggerFactory)
     {

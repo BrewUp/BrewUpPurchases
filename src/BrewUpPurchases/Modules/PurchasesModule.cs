@@ -20,7 +20,11 @@ public sealed class PurchasesModule : IModule
         const string storeTag = "Purchases";
 
         endpoints.MapPost("v1/purchases/orders", PurchasesEndpoints.HandleCreaOrdineFornitore)
-            .WithName("CreateSupplierOrders")
+            .WithName("CreaOrdineFornitore")
+            .WithTags(storeTag);
+
+        endpoints.MapPut("v1/purchases/orders/{orderId}", PurchasesEndpoints.HandleEvadiOrdineFornitore)
+            .WithName("EvadiOrdineFOrnitore")
             .WithTags(storeTag);
 
         endpoints.MapGet("v1/purchases/orders", PurchasesEndpoints.HandleGetSupplierOrders)

@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace BrewUpPurchases.Modules.Purchases.Concretes;
 
-public sealed class SupplierExpositionService : StoreBaseService, ISupplierExpositionService
+public sealed class SupplierExpositionService : PurchaseBaseService, ISupplierExpositionService
 {
     public SupplierExpositionService(IPersister persister, ILoggerFactory loggerFactory) : base(persister, loggerFactory)
     {

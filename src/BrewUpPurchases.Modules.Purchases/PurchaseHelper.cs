@@ -1,4 +1,5 @@
-﻿using BrewUpPurchases.Modules.BrewUpPurchases.Shared.Events;
+﻿using BrewUpPurchases.Modules.BrewUpPurchases.Shared.Commands;
+using BrewUpPurchases.Modules.BrewUpPurchases.Shared.Events;
 using BrewUpPurchases.Modules.BrewUpPurchases.Shared.Validators;
 using BrewUpPurchases.Modules.Purchases.Abstracts;
 using BrewUpPurchases.Modules.Purchases.Concretes;
@@ -24,13 +25,15 @@ public static class PurchaseHelper
         services.AddScoped<IStoreOrchestrator, StoreOrchestrator>();
         services.AddScoped<IIngredientsService, IngredientsService>();
         services.AddScoped<ISupplierExpositionService, SupplierExpositionService>();
-        services.AddScoped<IStoreService, StoreService>();
+        services.AddScoped<IPurchaseService, PurchaseService>();
 
         services.AddScoped<IDomainEventHandlerFactoryAsync, DomainEventHandlerFactoryAsync>();
         services.AddScoped<ICommandHandlerFactoryAsync, CommandHandlerFactoryAsync>();
 
-        services.AddScoped<IDomainEventHandlerAsync<OrdineFornitoreInserito>, OrdineFornitoreInseritoEventHandler>();
-        services.AddScoped<IDomainEventHandlerAsync<OrdineFornitoreInserito>, OrdineFornitoreInseritoForExpositionEventHandler>();
+        //services.AddScoped<IDomainEventHandlerAsync<OrdineFornitoreInserito>, OrdineFornitoreInseritoEventHandler>();
+        //services.AddScoped<IDomainEventHandlerAsync<OrdineFornitoreInserito>, OrdineFornitoreInseritoForExpositionEventHandler>();
+
+        services.AddScoped<IDomainEventHandlerAsync<OrdineFornitoreEvaso>, OrdineFornitoreEvasoEventHandler>();
 
         return services;
     }
